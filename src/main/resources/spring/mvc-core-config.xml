@@ -14,7 +14,7 @@
 	<import resource="mvc-view-config.xml" />
 
 	<!-- - POJOs labeled with the @Controller and @Service annotations are auto-detected. -->
-	<context:component-scan base-package="mk.finki.ukim.ezdravstvo" />
+	<context:component-scan base-package="mk.ukim.finki.ezdravstvo" />
 	
 	<mvc:annotation-driven/>
 

@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ezdr_users")
+@Table(name = "ezdravstvo_users")
 public class User extends BaseEntity {
 
 	public static enum Role {
