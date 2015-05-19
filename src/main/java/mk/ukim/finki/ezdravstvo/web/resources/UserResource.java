@@ -84,7 +84,7 @@ public class UserResource {
 	    if (rememberMe) {
 	      cookie.setMaxAge(TOKEN_DURATION);
 	    }
-	    cookie.setPath("https://ezdravstvoweb.herokuapp.com/");
+	    cookie.setPath("ezdravstvoweb.herokuapp.com");
 	    response.addCookie(cookie);
 	    return new TokenTransfer(TokenUtils.createToken(userDetails));
 	  }
