@@ -10,16 +10,22 @@
  *        through the $scope.
  * @see https://docs.angularjs.org/guide/di
  */
-FirstApp.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {
-    templateUrl: 'views/main.html',
-    controller: 'MainCtrl'
-  });
+FirstApp.config([ '$routeProvider', function($routeProvider) {
+	$routeProvider.when('/', {
+		templateUrl : 'views/main.html',
+		controller : 'MainCtrl'
+	});
 
-  $routeProvider.when('/404', {
-    templateUrl: '404.html'
-  });
-  $routeProvider.otherwise({
-    redirectTo: '/'
-  });
-}]);
+	$routeProvider.when('/404', {
+		templateUrl : '404.html'
+	});
+
+	$routeProvider.when('/login', {
+		templateUrl : 'views/login.html',
+		controller : 'LoginController'
+	});
+
+	$routeProvider.otherwise({
+		redirectTo : '/'
+	});
+} ]);

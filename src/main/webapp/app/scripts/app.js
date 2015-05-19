@@ -13,4 +13,76 @@
  *       directive
  * @description # avAngularStartupApp Main module of the application.
  */
-var FirstApp = angular.module('avAngularStartupApp', ['ngRoute']);
+var FirstApp = angular.module('avAngularStartupApp', [ 'ngResource', 'ngRoute',
+		'ngAnimate', 'ngTable', 'ngTableExport', 'ngCookies',
+		'chieffancypants.loadingBar', 'ui.bootstrap', 'ui.select2',
+		'mgcrea.ngStrap', 'toaster', 'angularFileUpload',
+		'pascalprecht.translate' ]);
+
+FirstApp.config([ '$translateProvider', '$httpProvider', 'settings',
+		function($translateProvider, $httpProvider, settings) {
+
+			$httpProvider.interceptors.push('HttpInterceptors');
+
+			// Initialize angular-translate
+			/*
+			 * $translateProvider.useStaticFilesLoader({ prefix : 'i18n/',
+			 * suffix : '.json' });
+			 * $translateProvider.preferredLanguage(settings.language);
+			 * $translateProvider.useCookieStorage();
+			 */
+		} ]);
+
+FirstApp
+		.run([
+				'$rootScope',
+				'$http',
+				'$cookies',
+				'$location',
+				'CrudService',
+				'$cookieStore',
+				'UserService',
+				function($rootScope, $http, $cookies, $location, CrudService,
+						$cookieStore, UserService) {
+
+					// var categoryService = crudService('categories');
+					//
+					// $rootScope.categories = categoryService.query();
+					$rootScope.user = {
+						username : null,
+						role : "null"
+					};
+
+					$rootScope.authToken = $cookieStore.get('token');
+					if ($rootScope.authToken) {
+						UserService.get(function(u) {
+							$rootScope.user = u;
+						});
+					}
+
+					$rootScope.logout = function() {
+						$rootScope.user = {
+							username : null,
+							role : "null"
+						};
+						delete $rootScope.authToken;
+						$cookies['token'] = null;
+						delete $cookies['token'];
+						var delete_cookie = function(name) {
+							document.cookie = name
+									+ '=; Path=/e-auction; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+						};
+						delete_cookie('token');
+						$location.path("/login");
+					};
+
+					// if (!$rootScope.authToken) {
+					// var tempTokenService = $http
+					// .get('/data/rest/token')
+					// .success(
+					// function(data, status, headers, config) {
+					// console.log('token obtained')
+					// });
+					// }
+
+				} ]);
