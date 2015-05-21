@@ -80,12 +80,6 @@ public class UserResource {
 			 * after authorization and password is needed for token generation
 			 */
 	    UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-	    Cookie cookie = new Cookie("token", TokenUtils.createToken(userDetails));
-	    if (rememberMe) {
-	      cookie.setMaxAge(TOKEN_DURATION);
-	    }
-	    cookie.setDomain(".ezdravstvoweb.herokuapp.com");
-	    response.addCookie(cookie);
 	    return new TokenTransfer(TokenUtils.createToken(userDetails));
 	  }
 }

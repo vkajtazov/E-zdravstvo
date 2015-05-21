@@ -94,7 +94,7 @@
 			<artifactId>java-property-utils</artifactId>
 			<version>1.9.1</version>
 		</dependency>
-		
+
 		<!-- END -->
 
 		<!-- BASIC DATA SOURCE CLASSES FOR HEROKU CLEARDB MYSQL -->
