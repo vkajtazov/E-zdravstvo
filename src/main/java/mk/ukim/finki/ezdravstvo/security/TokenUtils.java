@@ -40,7 +40,6 @@ public class TokenUtils {
 
 		String out= new String(Hex.encode(digest.digest(signatureBuilder.toString()
 				.getBytes())));
-		System.out.println(out);
 		return out;
 	}
 
