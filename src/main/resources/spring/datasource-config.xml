@@ -37,7 +37,7 @@
 		<property name="testConnectionOnCheckin" value="${jdbc.testConnectionOnCheckin}"></property>
 		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"></property>
 	</bean>
-	<!-- LOCAL DB CONFIG START-->
+	<!-- LOCAL DB CONFIG -->
 	<!-- <context:property-placeholder location="classpath:spring/data-access.properties" 
 		system-properties-mode="OVERRIDE" /> <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
 		<property name="driverClass" value="${jdbc.driverClassName}"></property> 
@@ -51,15 +51,5 @@
 		<property name="testConnectionOnCheckin" value="${jdbc.testConnectionOnCheckin}"></property> 
 		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"></property> 
 		</bean> -->
-
-	<!-- LOCAL DB CONFIG END -->
-
-
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
-		<property name="url" value="#{ 'jdbc:mysql://' + @dbUrl.getHost() + @dbUrl.getPath() 
-		}" /> <property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] 
-		}" /> <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] 
-		}" /> </bean> -->
-
 
 </beans>
