@@ -18,6 +18,8 @@
 	<import resource="datasource-config.xml" />
 
 	<context:component-scan base-package="mk.ukim.finki.ezdravstvo.service" />
+	
+	<import resource="mail/mail-config.xml"/>
 
 
 	<!-- Configurer that replaces ${...} placeholders with values from a properties 
