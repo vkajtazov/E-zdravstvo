@@ -1,9 +1,11 @@
 package mk.ukim.finki.ezdravstvo.model;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -17,7 +19,7 @@ public class User extends BaseEntity {
 		ROLE_PATIENT, ROLE_DOCTOR, ROLE_ADMIN
 	}
 
-	private String fistName;
+	private String firstName;
 
 	private String lastName;
 
@@ -26,6 +28,7 @@ public class User extends BaseEntity {
 
 	private String email;
 
+	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "user_password")
 	private String password;
 
@@ -33,12 +36,12 @@ public class User extends BaseEntity {
 	@Column(name = "user_role", length = 20, nullable = false)
 	private Role role;
 
-	public String getFistName() {
-		return fistName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
+	public void setFistName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {

@@ -20,4 +20,9 @@ public class PatientServiceImpl extends
 		return patientRepository;
 	}
 
+	@Override
+	public Patient findByUsername(String username) {
+		return patientRepository.findByUsername(username);
+	}
+
 }

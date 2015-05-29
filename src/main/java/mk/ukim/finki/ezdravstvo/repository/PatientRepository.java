@@ -4,4 +4,5 @@ import mk.ukim.finki.ezdravstvo.model.Patient;
 
 public interface PatientRepository extends JpaSpecificationRepository<Patient> {
 
+	Patient findByUsername(String username);
 }

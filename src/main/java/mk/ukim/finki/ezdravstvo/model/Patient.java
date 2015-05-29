@@ -3,6 +3,7 @@ package mk.ukim.finki.ezdravstvo.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -26,6 +27,9 @@ public class Patient extends User {
 	private String country;
 
 	private String postCode;
+
+	@OneToOne
+	private Doctor primaryDoctor;
 
 	public Date getBirthDate() {
 		return birthDate;
@@ -73,6 +77,14 @@ public class Patient extends User {
 
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+
+	public Doctor getPrimaryDoctor() {
+		return primaryDoctor;
+	}
+
+	public void setPrimaryDoctor(Doctor primaryDoctor) {
+		this.primaryDoctor = primaryDoctor;
 	}
 
 }

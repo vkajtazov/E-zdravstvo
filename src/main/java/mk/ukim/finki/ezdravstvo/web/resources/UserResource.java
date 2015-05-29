@@ -61,25 +61,26 @@ public class UserResource {
 	    return null;
 	  }
 	 
-	 @RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json")
-	  @ResponseBody
-	  public TokenTransfer authenticate(
-	    @RequestParam("username") String username,
-	    @RequestParam("password") String password,
-	    @RequestParam("rememberMe") boolean rememberMe,
-	    HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public TokenTransfer authenticate(
+			@RequestParam("username") String username,
+			@RequestParam("password") String password,
+			@RequestParam("rememberMe") boolean rememberMe,
+			HttpServletRequest request, HttpServletResponse response) {
 
-	    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-	      username, password);
-	    Authentication authentication = this.authManager
-	      .authenticate(authenticationToken);
-	    SecurityContextHolder.getContext().setAuthentication(authentication);
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				username, password);
+		Authentication authentication = this.authManager
+				.authenticate(authenticationToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			/*
-	     * Reload user as password of authentication principal will be null
-			 * after authorization and password is needed for token generation
-			 */
-	    UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-	    return new TokenTransfer(TokenUtils.createToken(userDetails));
-	  }
+		/*
+		 * Reload user as password of authentication principal will be null
+		 * after authorization and password is needed for token generation
+		 */
+		UserDetails userDetails = this.userDetailsService
+				.loadUserByUsername(username);
+		return new TokenTransfer(TokenUtils.createToken(userDetails));
+	}
 }

@@ -1,7 +1,12 @@
 package mk.ukim.finki.ezdravstvo.web;
 
+import java.sql.Date;
+
+import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
 import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.EmailMessage;
+import mk.ukim.finki.ezdravstvo.repository.AppointmentBookingRepository;
+import mk.ukim.finki.ezdravstvo.repository.TimeSlotsRepository;
 import mk.ukim.finki.ezdravstvo.service.DoctorService;
 import mk.ukim.finki.ezdravstvo.service.mail.EmailNotificationService;
 
@@ -20,6 +25,15 @@ public class TestController {
 	@Autowired
 	private EmailNotificationService emailNotificationService;
 
+	@Autowired
+	private TimeSlotsRepository timeSlotsRepository;
+
+	@Autowired
+	private DoctorService docService;
+
+	@Autowired
+	private AppointmentBookingRepository bookingRepository;
+
 	@RequestMapping(value = "/addDoctor", method = RequestMethod.GET, produces = "application/json")
 	public Doctor createDoctor() {
 		Doctor tmp = new Doctor();
@@ -37,5 +51,21 @@ public class TestController {
 				.addToModel("name", "Име").addToModel("number", 12345);
 
 		emailNotificationService.sendEmail(message);
+	}
+
+	@RequestMapping("/slots")
+	public void testSlots() {
+		System.out.println(timeSlotsRepository.count());
+		System.out.println(timeSlotsRepository.findFreeSlots(new Date(150, 5,
+				29), docService.findOne((long) 6)));
+	}
+
+	@RequestMapping("/book")
+	public void testBooking() {
+		Date d = new Date(150, 5, 29);
+		AppointmentBooking ab = new AppointmentBooking();
+		ab.setDate(d);
+
+		bookingRepository.save(ab);
 	}
 }

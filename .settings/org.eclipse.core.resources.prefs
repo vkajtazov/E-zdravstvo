@@ -4,5 +4,6 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/app/nav/topAnon.html=UTF-8
 encoding//src/main/webapp/app/nav/topDoctor.html=UTF-8
 encoding//src/main/webapp/app/nav/topPatient.html=UTF-8
+encoding//src/main/webapp/app/views/booking.html=UTF-8
 encoding//src/main/webapp/app/views/login.html=UTF-8
 encoding/<project>=UTF-8

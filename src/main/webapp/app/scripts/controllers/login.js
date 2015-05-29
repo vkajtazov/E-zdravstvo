@@ -3,9 +3,10 @@ FirstApp.controller('LoginController', [
   '$rootScope',
   '$location',
   '$filter',
+  '$cookieStore',
   'UserService',
   'toaster',
-  function($scope, $rootScope, $location, $filter, UserService, toaster) {
+  function($scope, $rootScope, $location, $filter, $cookieStore, UserService, toaster) {
     $scope.rememberMe = false;
 
     $scope.login = function() {
@@ -15,6 +16,7 @@ FirstApp.controller('LoginController', [
           rememberMe: $scope.rememberMe
         }), function(authenticationResult) {
           $rootScope.authToken = authenticationResult.token;
+          $cookieStore.put('token',$rootScope.authToken);
           UserService.get(function(u) {
             $rootScope.user = u;
           });

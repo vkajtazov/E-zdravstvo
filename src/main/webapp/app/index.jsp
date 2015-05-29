@@ -142,11 +142,13 @@
 	<script src="scripts/services/services.js"></script>
 	<script src="scripts/services/UserService.js"></script>
 	<script src="scripts/services/CrudService.js"></script>
+	<script src="scripts/services/BookingService.js"></script>	
 
 	<!-- controllers definition -->
 	<script src="scripts/controllers/main.js"></script>
 	<script src="scripts/controllers/login.js"></script>
 	<script src="scripts/controllers/AccountController.js"></script>
+	<script src="scripts/controllers/BookingController.js"></script>
 
 	<!-- endbuild -->
 

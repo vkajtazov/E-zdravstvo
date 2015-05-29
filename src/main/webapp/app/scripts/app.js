@@ -48,6 +48,7 @@ FirstApp
 					// var categoryService = crudService('categories');
 					//
 					// $rootScope.categories = categoryService.query();
+					
 					$rootScope.user = {
 						username : null,
 						role : "null"
