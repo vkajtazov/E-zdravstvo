@@ -10,6 +10,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ezdravstvo_users")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -28,7 +30,7 @@ public class User extends BaseEntity {
 
 	private String email;
 
-	@Basic(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@Column(name = "user_password")
 	private String password;
 
