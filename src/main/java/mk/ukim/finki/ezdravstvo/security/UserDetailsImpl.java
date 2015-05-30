@@ -7,10 +7,9 @@ import java.util.List;
 import mk.ukim.finki.ezdravstvo.model.User;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@SuppressWarnings("deprecation")
 public class UserDetailsImpl implements UserDetails {
 
 	/**
@@ -26,7 +25,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-		roles.add(new GrantedAuthorityImpl(user.getRole().toString()));
+		roles.add(new SimpleGrantedAuthority(user.getRole().toString()));
 		return roles;
 	}
 
