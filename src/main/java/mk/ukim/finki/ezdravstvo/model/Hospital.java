@@ -11,7 +11,7 @@ public class Hospital extends BaseEntity{
 	
 	private String address;
 	
-	private String City;
+	private String city;
 
 	public String getName() {
 		return name;
@@ -30,11 +30,12 @@ public class Hospital extends BaseEntity{
 	}
 
 	public String getCity() {
-		return City;
+		return city;
 	}
+	
 
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	
 }
