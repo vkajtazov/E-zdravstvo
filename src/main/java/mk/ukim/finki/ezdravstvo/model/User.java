@@ -1,11 +1,9 @@
 package mk.ukim.finki.ezdravstvo.model;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -19,6 +17,10 @@ public class User extends BaseEntity {
 
 	public static enum Role {
 		ROLE_PATIENT, ROLE_DOCTOR, ROLE_ADMIN
+	}
+	
+	public static enum Gender {
+		M, F
 	}
 
 	private String firstName;

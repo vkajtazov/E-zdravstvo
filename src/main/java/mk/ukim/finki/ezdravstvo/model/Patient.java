@@ -3,35 +3,30 @@ package mk.ukim.finki.ezdravstvo.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "patients")
 @PrimaryKeyJoinColumn(name = "id")
 public class Patient extends User {
 
-	public static enum Gender {
-		M, F
-	}
-
 	public Patient() {
 		this.setRole(User.Role.ROLE_PATIENT);
 	}
 
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthDate;
 
-	@Min(0)
-	@Max(1)
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	@Size(min = 14, max = 14)
 	private String umcn;
 
 	private String address;
