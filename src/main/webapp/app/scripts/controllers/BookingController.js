@@ -29,12 +29,12 @@ FirstApp.controller('BookingController',
 					};
 					$scope.toggleMin();
 
-					console.log($scope.dt.toISOString().split("T")[0]);
+					console.log($scope.dt);
 					$scope.search = function() {
 						BookingService.find($.param({
-							byDate : $scope.dt.toISOString().split("T")[0]
+							byDate : $scope.dt
 						}), function() {
-							console.log($scope.dt.toISOString().split("T")[0]);
+							console.log($scope.dt.toISOString());
 						});
 					}
 

@@ -39,7 +39,7 @@ public class AppointmentBookingResource {
 	@RequestMapping(value = "/find", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<TimeSlots> searchSlots(
-			@RequestParam("byDate") @DateTimeFormat(iso = ISO.DATE) Date byDate,
+			@RequestParam("byDate") Date byDate,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
@@ -63,7 +63,7 @@ public class AppointmentBookingResource {
 			System.out.println(tmp);
 			Date date = null;
 			try {
-				 date = formatter.parse(tmp);
+				date = formatter.parse(tmp);
 				System.out.println(date);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -71,7 +71,7 @@ public class AppointmentBookingResource {
 			}
 
 			java.sql.Date d = new java.sql.Date(date.getTime());
-			
+
 			return service.findFreeSlots(d, patient.getPrimaryDoctor());
 
 		}
