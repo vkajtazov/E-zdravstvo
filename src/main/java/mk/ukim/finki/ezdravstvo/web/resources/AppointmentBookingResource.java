@@ -1,9 +1,9 @@
 package mk.ukim.finki.ezdravstvo.web.resources;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +39,9 @@ public class AppointmentBookingResource {
 	@RequestMapping(value = "/find", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<TimeSlots> searchSlots(
-			@RequestParam("byDate") @DateTimeFormat(iso = ISO.DATE) String byDate,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+			@RequestParam("byDate") @DateTimeFormat(iso = ISO.DATE) Date byDate,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
 		Authentication authentication = SecurityContextHolder.getContext()
 				.getAuthentication();
@@ -55,16 +56,24 @@ public class AppointmentBookingResource {
 			Patient patient = patientService.findByUsername(userDetails
 					.getUsername());
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			System.out.println(byDate);
+
+			String tmp = formatter.format(byDate);
+			System.out.println(tmp);
+			Date date = null;
 			try {
-				 
-				java.util.Date date = formatter.parse(byDate);
-				Date d = new Date(date.getTime());
-				System.out.println(d);
-				return service.findFreeSlots(d, patient.getPrimaryDoctor());
-		 
+				 date = formatter.parse(tmp);
+				System.out.println(date);
 			} catch (ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			java.sql.Date d = new java.sql.Date(date.getTime());
+			
+			return service.findFreeSlots(d, patient.getPrimaryDoctor());
+
 		}
 		return null;
 	}

@@ -1,6 +1,6 @@
 package mk.ukim.finki.ezdravstvo.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -11,30 +11,32 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "appointments_booking")
-public class AppointmentBooking extends BaseEntity{
+public class AppointmentBooking extends BaseEntity {
 
 	@OneToOne
 	private Doctor doctor;
-	
+
 	@OneToOne
 	private Patient patient;
-	
+
 	@OneToOne
 	private Doctor referrer;
-	
+
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date date;
-	
+
 	@OneToOne
 	private TimeSlots timeSlot;
-	
+
 	@OneToOne
 	private BookingStatus status;
-	
-	private java.util.Date dateBooked;
-	
-	private java.util.Date dateUpdated;
-	
+
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private Date dateBooked;
+
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private Date dateUpdated;
+
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -98,5 +100,5 @@ public class AppointmentBooking extends BaseEntity{
 	public void setDateUpdated(java.util.Date dateUpdated) {
 		this.dateUpdated = dateUpdated;
 	}
-	
+
 }

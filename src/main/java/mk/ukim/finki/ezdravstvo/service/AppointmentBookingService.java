@@ -1,6 +1,6 @@
 package mk.ukim.finki.ezdravstvo.service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;

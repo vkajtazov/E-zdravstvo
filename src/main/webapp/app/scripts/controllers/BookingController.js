@@ -6,7 +6,6 @@ FirstApp.controller('BookingController',
 				function($scope, $rootScope, BookingService) {
 
 					$scope.dt = new Date();
-					$scope.dt.setDate($scope.dt.getDate() + 1)
 
 					$scope.format = 'yyyy-MM-dd';
 
@@ -30,11 +29,13 @@ FirstApp.controller('BookingController',
 					};
 					$scope.toggleMin();
 
-					console.log($scope.dt.getFullYear()+'-0'+$scope.dt.getMonth()+'-'+$scope.dt.getDate());
+					console.log($scope.dt.toISOString().split("T")[0]);
 					$scope.search = function() {
 						BookingService.find($.param({
-							byDate : $scope.dt.toISOString()
-						}));
+							byDate : $scope.dt.toISOString().split("T")[0]
+						}), function() {
+							console.log($scope.dt.toISOString().split("T")[0]);
+						});
 					}
 
 				} ]);
