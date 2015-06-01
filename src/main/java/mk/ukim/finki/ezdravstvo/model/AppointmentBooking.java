@@ -3,7 +3,7 @@ package mk.ukim.finki.ezdravstvo.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,22 +13,22 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Table(name = "appointments_booking")
 public class AppointmentBooking extends BaseEntity {
 
-	@OneToOne
+	@ManyToOne
 	private Doctor doctor;
 
-	@OneToOne
+	@ManyToOne
 	private Patient patient;
 
-	@OneToOne
+	@ManyToOne
 	private Doctor referrer;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date date;
 
-	@OneToOne
+	@ManyToOne
 	private TimeSlots timeSlot;
 
-	@OneToOne
+	@ManyToOne
 	private BookingStatus status;
 
 	@DateTimeFormat(iso = ISO.DATE_TIME)

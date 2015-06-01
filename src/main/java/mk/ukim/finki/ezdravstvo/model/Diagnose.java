@@ -4,8 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
@@ -13,9 +15,12 @@ import javax.persistence.Table;
 public class Diagnose extends BaseEntity {
 	@ManyToOne
 	private Patient patient;
-	@OneToOne
+	@ManyToOne
 	private Doctor doctor;
+	
 	private String diagnosis;
+	
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date createdAt;
 
 	public Patient getPatient() {

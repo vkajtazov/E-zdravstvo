@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -37,7 +37,7 @@ public class Patient extends User {
 
 	private String postCode;
 
-	@OneToOne
+	@ManyToOne
 	private Doctor primaryDoctor;
 
 	public Date getBirthDate() {
