@@ -2,7 +2,6 @@ package mk.ukim.finki.ezdravstvo.model;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -38,7 +37,7 @@ public class Patient extends User {
 
 	private String postCode;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	private Doctor primaryDoctor;
 
 	public Date getBirthDate() {
