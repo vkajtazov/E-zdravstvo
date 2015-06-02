@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.model.TimeSlots;
+import mk.ukim.finki.ezdravstvo.repository.TimeSlotsRepository;
 import mk.ukim.finki.ezdravstvo.service.AppointmentBookingService;
 import mk.ukim.finki.ezdravstvo.service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,10 +35,14 @@ public class AppointmentBookingResource {
 	@Autowired
 	private PatientService patientService;
 
+	@Autowired
+	private TimeSlotsRepository timeSlotsRepository;
+
+	
+
 	@RequestMapping(value = "/find", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public List<TimeSlots> searchSlots(
-			@RequestParam("byDate") Date byDate,
+	public List<TimeSlots> searchSlots(@RequestParam("byDate") Date byDate,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
@@ -76,5 +79,35 @@ public class AppointmentBookingResource {
 
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/book", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public boolean bookAppointment(@RequestParam("date") Date date,
+			@RequestParam("time_id") Long timeId, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+
+		TimeSlots timeSlot = timeSlotsRepository.findOne(timeId);
+		if (timeSlot == null)
+			return false;
+
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof String
+				&& ((String) principal).equals("anonymousUser")) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}
+		if (principal instanceof UserDetails) {
+
+			UserDetails userDetails = (UserDetails) principal;
+			Patient patient = patientService.findByUsername(userDetails
+					.getUsername());
+
+			return service.bookAppointment(date, timeSlot,
+					patient.getPrimaryDoctor(), patient);
+		}
+		return false;
+
 	}
 }

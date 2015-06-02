@@ -33,9 +33,19 @@ FirstApp.controller('BookingController',
 					$scope.search = function() {
 						BookingService.find($.param({
 							byDate : $scope.dt
-						}), function() {
-							console.log($scope.dt.toISOString());
+						}), function(result) {
+							$scope.entity = {};
+							$scope.entities = result;
+							$scope.entity = $scope.entities[0];
+							console.log($scope.entity.id);
 						});
+					}
+
+					$scope.book = function() {
+						BookingService.book($.param({
+							date : $scope.dt,
+							time_id : $scope.entity.id
+						}));
 					}
 
 				} ]);

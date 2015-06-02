@@ -10,6 +10,16 @@ FirstApp.factory('BookingService', function($resource) {
 			headers : {
 				'Content-Type' : 'application/x-www-form-urlencoded'
 			}
+		},
+
+		book : {
+			method : 'POST',
+			params : {
+				'action' : 'book'
+			},
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded'
+			}
 		}
 	});
 });

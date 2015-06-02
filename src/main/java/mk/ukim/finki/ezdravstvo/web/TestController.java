@@ -5,9 +5,13 @@ import java.sql.Date;
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
 import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.EmailMessage;
+import mk.ukim.finki.ezdravstvo.model.Patient;
+import mk.ukim.finki.ezdravstvo.model.TimeSlots;
 import mk.ukim.finki.ezdravstvo.repository.AppointmentBookingRepository;
 import mk.ukim.finki.ezdravstvo.repository.TimeSlotsRepository;
+import mk.ukim.finki.ezdravstvo.service.AppointmentBookingService;
 import mk.ukim.finki.ezdravstvo.service.DoctorService;
+import mk.ukim.finki.ezdravstvo.service.PatientService;
 import mk.ukim.finki.ezdravstvo.service.mail.EmailNotificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +28,15 @@ public class TestController {
 
 	@Autowired
 	private EmailNotificationService emailNotificationService;
-
+	
 	@Autowired
 	private TimeSlotsRepository timeSlotsRepository;
 
 	@Autowired
-	private DoctorService docService;
-
+	private AppointmentBookingService bookingService;
+	
 	@Autowired
-	private AppointmentBookingRepository bookingRepository;
+	private PatientService patientService;
 
 	@RequestMapping(value = "/addDoctor", method = RequestMethod.GET, produces = "application/json")
 	public Doctor createDoctor() {
@@ -53,19 +57,15 @@ public class TestController {
 		emailNotificationService.sendEmail(message);
 	}
 
-	@RequestMapping("/slots")
-	public void testSlots() {
-		System.out.println(timeSlotsRepository.count());
-		System.out.println(timeSlotsRepository.findFreeSlots(new Date(150, 5,
-				29), docService.findOne((long) 6)));
-	}
 
 	@RequestMapping("/book")
 	public void testBooking() {
-		Date d = new Date(150, 5, 29);
-		AppointmentBooking ab = new AppointmentBooking();
-		ab.setDate(d);
-
-		bookingRepository.save(ab);
+		java.util.Date date = new java.util.Date();
+		
+		Doctor d = doctorService.findOne((long) 6);
+		Patient p = patientService.findOne((long) 1);
+		TimeSlots timeSlot = timeSlotsRepository.findOne((long) 1);
+		
+		//bookingService.bookAppointment(date, timeSlot, d);
 	}
 }
