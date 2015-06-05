@@ -5,23 +5,23 @@ import mk.ukim.finki.ezdravstvo.model.User;
 public class TokenTransfer {
 	private final String token;
 
-	private User.Role role;
+	private User user;
 
-	public TokenTransfer(String token, User.Role role) {
+	public TokenTransfer(String token, User user) {
 		this.token = token;
-		this.role = role;
+		this.user = user;
 	}
 
 	public String getToken() {
 		return this.token;
 	}
 
-	public User.Role getRole() {
-		return role;
+	public User getUser() {
+		return user;
 	}
 
-	public void setRole(User.Role role) {
-		this.role = role;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

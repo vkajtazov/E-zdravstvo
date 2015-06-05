@@ -1,23 +1,21 @@
 package mk.ukim.finki.ezdravstvo.security;
 
-import mk.ukim.finki.ezdravstvo.model.User;
-
 public class UserTransfer {
 
 	private final String username;
-	private final User user;
+	private final String role;
 
-	public UserTransfer(String username, User user) {
+	public UserTransfer(String username, String role) {
 		this.username = username;
-		this.user = user;
+		this.role = role;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public User getUser() {
-		return user;
+	public String getRole() {
+		return role;
 	}
 
 }

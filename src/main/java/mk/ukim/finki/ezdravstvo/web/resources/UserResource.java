@@ -30,37 +30,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/user")
 public class UserResource {
 
-	 private static final int TOKEN_DURATION = 30 * 24 * 60 * 60; // 30 days
-	 
-	 @Autowired
-	 private UserDetailsService userDetailsService;
-	 
-	 @Autowired
-	 @Qualifier("authenticationManager")
-	 private AuthenticationManager authManager;
-	 
-	 @Autowired
-	 private UserService userService;
-	 
-	 @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	 @ResponseBody
-	  public UserTransfer getUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	    Authentication authentication = SecurityContextHolder.getContext()
-	      .getAuthentication();
-	    Object principal = authentication.getPrincipal();
-	    if (principal instanceof String
-	      && ((String) principal).equals("anonymousUser")) {
-	      response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-	    }
-	    if (principal instanceof UserDetails) {
+	private static final int TOKEN_DURATION = 30 * 24 * 60 * 60; // 30 days
 
-	      UserDetails userDetails = (UserDetails) principal;
-	      User user = userService.findByUsername(userDetails.getUsername());
-	      return new UserTransfer(user.getUsername(), user);
-	    }
-	    return null;
-	  }
-	 
+	@Autowired
+	private UserDetailsService userDetailsService;
+
+	@Autowired
+	@Qualifier("authenticationManager")
+	private AuthenticationManager authManager;
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public UserTransfer getUser(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof String
+				&& ((String) principal).equals("anonymousUser")) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}
+		if (principal instanceof UserDetails) {
+
+			UserDetails userDetails = (UserDetails) principal;
+			User user = userService.findByUsername(userDetails.getUsername());
+			return new UserTransfer(user.getUsername(), user.getRole()
+					.toString());
+		}
+		return null;
+	}
+
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public TokenTransfer authenticate(
@@ -81,9 +83,9 @@ public class UserResource {
 		 */
 		UserDetails userDetails = this.userDetailsService
 				.loadUserByUsername(username);
-		
-		User user= userService.findByUsername(username);
-		
-		return new TokenTransfer(TokenUtils.createToken(userDetails),user.getRole());
+
+		User user = userService.findByUsername(username);
+
+		return new TokenTransfer(TokenUtils.createToken(userDetails), user);
 	}
 }
