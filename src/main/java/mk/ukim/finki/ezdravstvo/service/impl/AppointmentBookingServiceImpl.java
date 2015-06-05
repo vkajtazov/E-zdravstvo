@@ -98,4 +98,9 @@ public class AppointmentBookingServiceImpl
 		java.sql.Date d = new java.sql.Date(date.getTime());
 		return d;
 	}
+
+	@Override
+	public List<AppointmentBooking> findByDoctor(Doctor doctor) {
+		return repository.findByDoctor(doctor);
+	}
 }

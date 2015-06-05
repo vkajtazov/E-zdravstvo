@@ -14,4 +14,6 @@ public interface AppointmentBookingRepository extends
 
 	AppointmentBooking findByDateAndTimeSlotAndDoctor(Date date,
 			TimeSlots timeSlot, Doctor doctor);
+	
+	List<AppointmentBooking> findByDoctor(Doctor doctor);
 }

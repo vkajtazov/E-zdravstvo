@@ -9,10 +9,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
+import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.model.TimeSlots;
 import mk.ukim.finki.ezdravstvo.repository.TimeSlotsRepository;
 import mk.ukim.finki.ezdravstvo.service.AppointmentBookingService;
+import mk.ukim.finki.ezdravstvo.service.DoctorService;
 import mk.ukim.finki.ezdravstvo.service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,8 @@ public class AppointmentBookingResource {
 	@Autowired
 	private TimeSlotsRepository timeSlotsRepository;
 
-	
+	@Autowired
+	private DoctorService doctorService;
 
 	@RequestMapping(value = "/find", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -110,4 +114,20 @@ public class AppointmentBookingResource {
 		return false;
 
 	}
+
+	@RequestMapping(value = "/byDoctor", method = RequestMethod.GET, produces = "application/json")
+	private List<AppointmentBooking> getByDoctor(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			Doctor doctor = doctorService.findByUsername(userDetails
+					.getUsername());
+			return service.findByDoctor(doctor);
+		}
+		return null;
+	}
+
 }
