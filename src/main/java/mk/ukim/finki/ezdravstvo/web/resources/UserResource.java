@@ -81,6 +81,9 @@ public class UserResource {
 		 */
 		UserDetails userDetails = this.userDetailsService
 				.loadUserByUsername(username);
-		return new TokenTransfer(TokenUtils.createToken(userDetails));
+		
+		User user= userService.findByUsername(username);
+		
+		return new TokenTransfer(TokenUtils.createToken(userDetails),user.getRole());
 	}
 }
