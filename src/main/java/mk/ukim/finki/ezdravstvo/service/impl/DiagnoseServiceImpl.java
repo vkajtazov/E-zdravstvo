@@ -1,6 +1,9 @@
 package mk.ukim.finki.ezdravstvo.service.impl;
 
+import java.util.List;
+
 import mk.ukim.finki.ezdravstvo.model.Diagnose;
+import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.repository.DiagnoseRepository;
 import mk.ukim.finki.ezdravstvo.service.DiagnoseService;
 
@@ -18,6 +21,11 @@ public class DiagnoseServiceImpl extends
 	@Override
 	protected DiagnoseRepository getRepository() {
 		return repository;
+	}
+
+	@Override
+	public List<Diagnose> findByPatient(Patient patient) {
+		return repository.findByPatient(patient);
 	}
 
 }

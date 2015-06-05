@@ -19,6 +19,7 @@ import mk.ukim.finki.ezdravstvo.service.DoctorService;
 import mk.ukim.finki.ezdravstvo.service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -115,6 +116,7 @@ public class AppointmentBookingResource {
 
 	}
 
+	@Secured("ROLE_DOCTOR")
 	@RequestMapping(value = "/byDoctor", method = RequestMethod.GET, produces = "application/json")
 	private List<AppointmentBooking> getByDoctor(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
