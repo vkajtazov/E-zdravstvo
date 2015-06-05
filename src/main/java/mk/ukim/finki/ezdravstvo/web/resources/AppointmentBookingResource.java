@@ -116,7 +116,7 @@ public class AppointmentBookingResource {
 
 	}
 
-	@Secured("ROLE_DOCTOR")
+	@Secured({"ROLE_DOCTOR"})
 	@RequestMapping(value = "/byDoctor", method = RequestMethod.GET, produces = "application/json")
 	private List<AppointmentBooking> getByDoctor(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
