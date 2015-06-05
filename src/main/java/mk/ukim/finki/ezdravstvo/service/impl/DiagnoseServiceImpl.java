@@ -5,7 +5,9 @@ import mk.ukim.finki.ezdravstvo.repository.DiagnoseRepository;
 import mk.ukim.finki.ezdravstvo.service.DiagnoseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DiagnoseServiceImpl extends
 		BaseEntityCrudServiceImpl<Diagnose, DiagnoseRepository> implements
 		DiagnoseService {
