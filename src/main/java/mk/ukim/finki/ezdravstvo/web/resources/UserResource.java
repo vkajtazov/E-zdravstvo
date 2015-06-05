@@ -56,7 +56,7 @@ public class UserResource {
 
 	      UserDetails userDetails = (UserDetails) principal;
 	      User user = userService.findByUsername(userDetails.getUsername());
-	      return new UserTransfer(user.getUsername(), user.getRole().toString());
+	      return new UserTransfer(user.getUsername(), user);
 	    }
 	    return null;
 	  }
