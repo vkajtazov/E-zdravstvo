@@ -18,4 +18,9 @@ public class DoctorServiceImpl extends BaseEntityCrudServiceImpl<Doctor, DoctorR
 		return doctorRepository;
 	}
 
+	@Override
+	public Doctor findByUsername(String username) {
+		return doctorRepository.findByUsername(username);
+	}
+
 }

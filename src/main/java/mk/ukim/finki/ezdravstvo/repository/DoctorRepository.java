@@ -4,4 +4,5 @@ import mk.ukim.finki.ezdravstvo.model.Doctor;
 
 public interface DoctorRepository extends JpaSpecificationRepository<Doctor> {
 
+	Doctor findByUsername(String username);
 }

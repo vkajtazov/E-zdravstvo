@@ -1,5 +1,8 @@
 package mk.ukim.finki.ezdravstvo.service.impl;
 
+import java.util.List;
+
+import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.repository.PatientRepository;
 import mk.ukim.finki.ezdravstvo.service.PatientService;
@@ -23,6 +26,11 @@ public class PatientServiceImpl extends
 	@Override
 	public Patient findByUsername(String username) {
 		return patientRepository.findByUsername(username);
+	}
+
+	@Override
+	public List<Patient> findByDoctor(Doctor doctor) {
+		return patientRepository.findByPrimaryDoctor(doctor);
 	}
 
 }

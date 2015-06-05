@@ -1,8 +1,6 @@
 package mk.ukim.finki.ezdravstvo.web.resources;
 
 import java.io.IOException;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,8 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/user")
 public class UserResource {
-
-	private static final int TOKEN_DURATION = 30 * 24 * 60 * 60; // 30 days
 
 	@Autowired
 	private UserDetailsService userDetailsService;
