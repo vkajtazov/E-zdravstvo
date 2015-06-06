@@ -24,7 +24,7 @@ public class Prescription extends BaseEntity {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date createdAt;
 
-	@Column(length = 250)
+	@Column(name = "description" ,length = 250)
 	private String description;
 
 	public Diagnose getDiagnose() {
