@@ -43,9 +43,6 @@ public class ChangeRequestResource extends
 	@Override
 	public ChangeRequest create(@RequestBody @Valid ChangeRequest entity,
 			HttpServletRequest request, HttpServletResponse response) {
-		if (entity.getStatus() == null) {
-			return null;
-		}
 
 		ChangeRequest tmpRequest = null;
 		if (entity.getId() != null) {
@@ -67,6 +64,9 @@ public class ChangeRequestResource extends
 			tmpPatient.setPrimaryDoctor(tmpDoctor);
 			patientService.save(tmpPatient);
 
+		}
+		if (entity.getStatus() == null) {
+			return null;
 		}
 		tmpRequest.setStatus(entity.getStatus());
 		tmpRequest.setRequestUpdated(tmpDate);
