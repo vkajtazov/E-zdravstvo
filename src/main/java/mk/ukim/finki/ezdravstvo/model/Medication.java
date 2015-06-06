@@ -8,6 +8,8 @@ import javax.persistence.Table;
 public class Medication extends BaseEntity{
 	
 	private String name;
+	
+	private String company;
 
 	public String getName() {
 		return name;
@@ -17,4 +19,13 @@ public class Medication extends BaseEntity{
 		this.name = name;
 	}
 
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	
 }

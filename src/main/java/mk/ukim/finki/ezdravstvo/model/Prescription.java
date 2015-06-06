@@ -2,6 +2,7 @@ package mk.ukim.finki.ezdravstvo.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -22,6 +23,9 @@ public class Prescription extends BaseEntity {
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date createdAt;
+
+	@Column(length = 250)
+	private String description;
 
 	public Diagnose getDiagnose() {
 		return diagnose;
@@ -45,6 +49,14 @@ public class Prescription extends BaseEntity {
 
 	public void setMedication(Medication medication) {
 		this.medication = medication;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
