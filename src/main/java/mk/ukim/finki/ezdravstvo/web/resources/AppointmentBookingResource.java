@@ -117,7 +117,7 @@ public class AppointmentBookingResource {
 	}
 
 	@RequestMapping(value = "/byDoctor", method = RequestMethod.GET, produces = "application/json")
-	private List<AppointmentBooking> getByDoctor(HttpServletRequest request,
+	public List<AppointmentBooking> getByDoctor(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext()
 				.getAuthentication();
