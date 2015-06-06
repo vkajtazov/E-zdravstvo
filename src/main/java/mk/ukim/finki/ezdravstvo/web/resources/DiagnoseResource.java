@@ -27,7 +27,7 @@ public class DiagnoseResource extends CrudResource<Diagnose, DiagnoseService> {
 
 	@Autowired
 	private DiagnoseService service;
-	
+
 	@Autowired
 	private PatientService patientService;
 
@@ -35,8 +35,7 @@ public class DiagnoseResource extends CrudResource<Diagnose, DiagnoseService> {
 	public DiagnoseService getService() {
 		return service;
 	}
-	
-	@Secured({"ROLE_PATIENT"})
+
 	@RequestMapping(value = "/byPatient", method = RequestMethod.GET, produces = "application/json")
 	private List<Diagnose> getByPatient(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
