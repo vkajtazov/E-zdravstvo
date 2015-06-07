@@ -24,7 +24,7 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClassName}"></property>
 		<property name="jdbcUrl"
-			value="#{ 'jdbc:mysql://' + @dbUrl.getHost() + @dbUrl.getPath()}" />
+			value="#{ 'jdbc:mysql://' + @dbUrl.getHost() + @dbUrl.getPath() }" />
 		<property name="user" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
 		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
 
