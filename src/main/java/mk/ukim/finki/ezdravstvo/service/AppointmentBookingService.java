@@ -21,4 +21,7 @@ public interface AppointmentBookingService extends
 	List<AppointmentBooking> findByPatient(Patient patient);
 
 	boolean cancelAppointment(Long appointment_id);
+
+	boolean bookAppointmentFromDoctor(Date date, TimeSlots timeSlot,
+			Doctor doctor, Patient patient, Doctor referrer);
 }

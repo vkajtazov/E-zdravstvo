@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,6 +49,20 @@ public class DiagnoseResource extends CrudResource<Diagnose, DiagnoseService> {
 					.getUsername());
 			return service.findByPatient(patient);
 		}
+		return null;
+	}
+
+	@RequestMapping(value = "/byPatientId", method = RequestMethod.POST, produces = "application/json")
+	private List<Diagnose> getByPatientId(@RequestParam("patient_id") Long id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		Patient tmpPatient = patientService.findOne(id);
+
+		if (tmpPatient != null) {
+			return service.findByPatient(tmpPatient);
+		}
+
 		return null;
 	}
 }

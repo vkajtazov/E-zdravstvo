@@ -1,0 +1,6 @@
+<h1>Здраво $firstName $lastName</h1>
+
+<div>Вашиот матичен лекар креираше упат кај доктор $docFName $docLName на термин на дата $date $timeFrom - $timeTo </div>
+
+Со почит,<br/>
+Тимот од ИКТ

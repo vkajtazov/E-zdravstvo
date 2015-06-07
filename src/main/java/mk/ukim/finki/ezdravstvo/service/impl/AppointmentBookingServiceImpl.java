@@ -117,10 +117,50 @@ public class AppointmentBookingServiceImpl
 		if (tmpAppointment == null) {
 			return false;
 		}
-		
+
 		BookingStatus tmpStatus = statusRepository.findOne((long) 2);
 		tmpAppointment.setStatus(tmpStatus);
+		tmpAppointment.setDateUpdated(new Date());
 		repository.save(tmpAppointment);
 		return true;
+	}
+
+	@Override
+	public boolean bookAppointmentFromDoctor(Date date, TimeSlots timeSlot,
+			Doctor doctor, Patient patient, Doctor referrer) {
+		AppointmentBooking tmp = new AppointmentBooking();
+
+		java.sql.Date date1 = formatDate(date);
+
+		EmailMessage message = EmailMessage.create().subject("УПАТ")
+				.to(patient.getEmail()).template("test_email.vm")
+				.addToModel("firstName", patient.getFirstName())
+				.addToModel("lastName", patient.getLastName())
+				.addToModel("docFName", doctor.getFirstName())
+				.addToModel("docLName", doctor.getLastName())
+				.addToModel("date", date1.toString())
+				.addToModel("timeFrom", timeSlot.getStartTime())
+				.addToModel("timeTo", timeSlot.getEndTime());
+
+		tmp.setDate(date1);
+		tmp.setDoctor(doctor);
+		tmp.setTimeSlot(timeSlot);
+		tmp.setStatus(statusRepository.findOne((long) 1));
+		Date tmpDate = new Date();
+		tmp.setDateBooked(tmpDate);
+		tmp.setDateUpdated(tmpDate);
+		tmp.setPatient(patient);
+		tmp.setReferrer(referrer);
+
+		synchronized (this) {
+			AppointmentBooking ab = repository.findByDateAndTimeSlotAndDoctor(
+					date1, timeSlot, doctor);
+			if (ab == null) {
+				repository.save(tmp);
+				emailNotificationService.sendEmailAsync(message);
+				return true;
+			}
+		}
+		return false;
 	}
 }

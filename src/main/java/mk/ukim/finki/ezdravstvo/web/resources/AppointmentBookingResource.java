@@ -19,7 +19,6 @@ import mk.ukim.finki.ezdravstvo.service.DoctorService;
 import mk.ukim.finki.ezdravstvo.service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -150,5 +149,35 @@ public class AppointmentBookingResource {
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST, produces = "application/json")
 	public boolean cancel(@RequestParam("id") Long id) {
 		return service.cancelAppointment(id);
+	}
+
+	@RequestMapping(value = "/bookFromDoctor", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public boolean bookAppointmentFromDoctor(@RequestParam("date") Date date,
+			@RequestParam("time_id") Long timeId,
+			@RequestParam("patient_id") Long patientId,
+			@RequestParam("doctor_id") Long doctorId,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		TimeSlots timeSlot = timeSlotsRepository.findOne(timeId);
+		if (timeSlot == null)
+			return false;
+
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+
+		if (principal instanceof UserDetails) {
+
+			UserDetails userDetails = (UserDetails) principal;
+			Doctor referrer = doctorService.findByUsername(userDetails
+					.getUsername());
+			Doctor doctor =  doctorService.findOne(doctorId);
+			Patient patient = patientService.findOne(patientId);
+			return service.bookAppointmentFromDoctor(date, timeSlot, doctor, patient, referrer);
+		}
+		return false;
+
 	}
 }
