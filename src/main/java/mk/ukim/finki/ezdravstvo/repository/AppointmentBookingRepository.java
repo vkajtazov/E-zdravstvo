@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
+import com.sun.xml.bind.v2.schemagen.xmlschema.Appinfo;
+
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
 import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.Patient;
@@ -24,4 +26,6 @@ public interface AppointmentBookingRepository extends
 
 	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.patient=?1 AND ab.status.id=1")
 	List<AppointmentBooking> findByPatient(Patient patient);
+	
+	List<AppointmentBooking> findByReferrer(Doctor referrer);
 }
