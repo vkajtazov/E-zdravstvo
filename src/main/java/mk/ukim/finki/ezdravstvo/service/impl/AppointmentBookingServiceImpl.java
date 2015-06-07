@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
+import mk.ukim.finki.ezdravstvo.model.BookingStatus;
 import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.EmailMessage;
 import mk.ukim.finki.ezdravstvo.model.Patient;
@@ -107,5 +108,19 @@ public class AppointmentBookingServiceImpl
 	@Override
 	public List<AppointmentBooking> findByPatient(Patient patient) {
 		return repository.findByPatient(patient);
+	}
+
+	@Override
+	public boolean cancelAppointment(Long appointment_id) {
+		AppointmentBooking tmpAppointment = repository.findOne(appointment_id);
+
+		if (tmpAppointment == null) {
+			return false;
+		}
+		
+		BookingStatus tmpStatus = statusRepository.findOne((long) 2);
+		tmpAppointment.setStatus(tmpStatus);
+		repository.save(tmpAppointment);
+		return true;
 	}
 }

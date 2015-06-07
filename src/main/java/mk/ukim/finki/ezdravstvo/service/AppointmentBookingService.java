@@ -20,4 +20,5 @@ public interface AppointmentBookingService extends
 
 	List<AppointmentBooking> findByPatient(Patient patient);
 
+	boolean cancelAppointment(Long appointment_id);
 }

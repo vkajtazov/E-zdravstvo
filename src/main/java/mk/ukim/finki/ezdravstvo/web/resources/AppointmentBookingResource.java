@@ -141,9 +141,14 @@ public class AppointmentBookingResource {
 			UserDetails userDetails = (UserDetails) principal;
 			Patient patient = patientService.findByUsername(userDetails
 					.getUsername());
-			
+
 			return service.findByPatient(patient);
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST, produces = "application/json")
+	public boolean cancel(@RequestParam("id") Long id) {
+		return service.cancelAppointment(id);
 	}
 }
