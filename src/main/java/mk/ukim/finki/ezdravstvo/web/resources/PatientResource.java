@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import mk.ukim.finki.ezdravstvo.model.Doctor;
 import mk.ukim.finki.ezdravstvo.model.Patient;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,10 +52,23 @@ public class PatientResource extends CrudResource<Patient, PatientService> {
 		if (principal instanceof UserDetails) {
 
 			UserDetails userDetails = (UserDetails) principal;
-			Doctor doctor = doctorService.findByUsername(userDetails.getUsername());
+			Doctor doctor = doctorService.findByUsername(userDetails
+					.getUsername());
 			return patientService.findByDoctor(doctor);
 		}
 		return null;
 	}
 
+	@Override
+	public Patient create(@RequestBody @Valid Patient entity,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		if (entity.getId() != null) {
+			Patient tmpPatient = patientService.findOne(entity.getId());
+			if (tmpPatient != null) {
+				entity.setPassword(tmpPatient.getPassword());
+			}
+		}
+		return super.create(entity, request, response);
+	}
 }
