@@ -1,20 +1,25 @@
 package mk.ukim.finki.ezdravstvo.web.resources;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import mk.ukim.finki.ezdravstvo.model.Diagnose;
+import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.model.Prescription;
 import mk.ukim.finki.ezdravstvo.service.DiagnoseService;
 import mk.ukim.finki.ezdravstvo.service.PrescriptionService;
 import mk.ukim.finki.ezdravstvo.web.CrudResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,14 +49,4 @@ public class PrescriptionResource extends
 		
 		return service.findByDiagnose(tmpDiagnose);
 	}
-
-	@Override
-	public Prescription create(Prescription entity, HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		entity.setCreatedAt(new Date());
-		return super.create(entity, request, response);
-	}
-	
-	
 }
