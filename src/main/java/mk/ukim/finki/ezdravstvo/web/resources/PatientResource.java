@@ -62,7 +62,7 @@ public class PatientResource extends CrudResource<Patient, PatientService> {
 	@Override
 	public Patient create(@RequestBody @Valid Patient entity,
 			HttpServletRequest request, HttpServletResponse response) {
-
+		System.out.println(entity.getLastName());
 		if (entity.getId() != null) {
 			Patient tmpPatient = patientService.findOne(entity.getId());
 			if (tmpPatient != null) {
