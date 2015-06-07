@@ -18,4 +18,6 @@ public interface AppointmentBookingService extends
 
 	List<AppointmentBooking> findByDoctor(Doctor doctor);
 
+	List<AppointmentBooking> findByPatient(Patient patient);
+
 }

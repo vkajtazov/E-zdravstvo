@@ -103,4 +103,9 @@ public class AppointmentBookingServiceImpl
 	public List<AppointmentBooking> findByDoctor(Doctor doctor) {
 		return repository.findByDoctor(doctor);
 	}
+
+	@Override
+	public List<AppointmentBooking> findByPatient(Patient patient) {
+		return repository.findByPatient(patient);
+	}
 }

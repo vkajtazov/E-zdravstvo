@@ -5,6 +5,7 @@ import java.util.List;
 
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
 import mk.ukim.finki.ezdravstvo.model.Doctor;
+import mk.ukim.finki.ezdravstvo.model.Patient;
 import mk.ukim.finki.ezdravstvo.model.TimeSlots;
 
 public interface AppointmentBookingRepository extends
@@ -16,4 +17,6 @@ public interface AppointmentBookingRepository extends
 			TimeSlots timeSlot, Doctor doctor);
 	
 	List<AppointmentBooking> findByDoctor(Doctor doctor);
+	
+	List<AppointmentBooking> findByPatient(Patient patient);
 }

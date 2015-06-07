@@ -131,4 +131,19 @@ public class AppointmentBookingResource {
 		return null;
 	}
 
+	@RequestMapping(value = "/byPatient", method = RequestMethod.GET, produces = "application/json")
+	public List<AppointmentBooking> getByPatient(HttpServletRequest request,
+			HttpServletResponse response) {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			Patient patient = patientService.findByUsername(userDetails
+					.getUsername());
+			
+			return service.findByPatient(patient);
+		}
+		return null;
+	}
 }
