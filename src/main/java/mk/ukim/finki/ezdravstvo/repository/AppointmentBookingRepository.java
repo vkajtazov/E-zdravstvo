@@ -15,6 +15,7 @@ public interface AppointmentBookingRepository extends
 
 	List<AppointmentBooking> findByDate(Date date);
 
+	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.date=?1 AND ab.timeSlot=?2 AND ab.doctor=?3 AND ab.status.id=1")
 	AppointmentBooking findByDateAndTimeSlotAndDoctor(Date date,
 			TimeSlots timeSlot, Doctor doctor);
 
