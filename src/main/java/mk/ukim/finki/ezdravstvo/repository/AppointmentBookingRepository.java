@@ -18,9 +18,9 @@ public interface AppointmentBookingRepository extends
 	AppointmentBooking findByDateAndTimeSlotAndDoctor(Date date,
 			TimeSlots timeSlot, Doctor doctor);
 
-	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.doctor=?1 ab.status.id=1")
+	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.doctor=?1 AND ab.status.id=1")
 	List<AppointmentBooking> findByDoctor(Doctor doctor);
 
-	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.patient=?1 ab.status.id=1")
+	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.patient=?1 AND ab.status.id=1")
 	List<AppointmentBooking> findByPatient(Patient patient);
 }
