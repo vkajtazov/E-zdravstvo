@@ -180,4 +180,19 @@ public class AppointmentBookingResource {
 		return false;
 
 	}
+	
+	@RequestMapping(value = "/byReferrer", method = RequestMethod.GET, produces = "application/json")
+	public List<AppointmentBooking> getByReferrer(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			Doctor referrer = doctorService.findByUsername(userDetails
+					.getUsername());
+			return service.findByReferrer(referrer);
+		}
+		return null;
+	}
 }

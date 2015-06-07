@@ -24,4 +24,7 @@ public interface AppointmentBookingService extends
 
 	boolean bookAppointmentFromDoctor(Date date, TimeSlots timeSlot,
 			Doctor doctor, Patient patient, Doctor referrer);
+
+	List<AppointmentBooking> findByReferrer(Doctor referrer);
+
 }

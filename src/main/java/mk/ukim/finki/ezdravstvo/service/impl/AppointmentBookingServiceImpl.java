@@ -163,4 +163,9 @@ public class AppointmentBookingServiceImpl
 		}
 		return false;
 	}
+
+	@Override
+	public List<AppointmentBooking> findByReferrer(Doctor referrer) {
+		return repository.findByReferrer(referrer);
+	}
 }

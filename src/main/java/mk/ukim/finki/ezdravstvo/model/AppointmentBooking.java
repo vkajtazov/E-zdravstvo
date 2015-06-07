@@ -31,6 +31,9 @@ public class AppointmentBooking extends BaseEntity {
 	@ManyToOne
 	private BookingStatus status;
 
+	@ManyToOne
+	private Diagnose diagnose;
+
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date dateBooked;
 
@@ -99,6 +102,14 @@ public class AppointmentBooking extends BaseEntity {
 
 	public void setDateUpdated(java.util.Date dateUpdated) {
 		this.dateUpdated = dateUpdated;
+	}
+
+	public Diagnose getDiagnose() {
+		return diagnose;
+	}
+
+	public void setDiagnose(Diagnose diagnose) {
+		this.diagnose = diagnose;
 	}
 
 }
