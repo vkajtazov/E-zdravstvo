@@ -50,7 +50,8 @@ public class PrescriptionResource extends
 			HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		entity.setCreatedAt(new Date());
-		return super.create(entity, request, response);
+		getService().save(entity);
+		return entity;
 	}
 	
 	
