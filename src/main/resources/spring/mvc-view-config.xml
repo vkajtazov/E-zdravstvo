@@ -30,17 +30,17 @@
 		</property>
 	</bean>
 
-	<bean id="stringHttpMessageConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<constructor-arg index="0" name="defaultCharset"
-			value="UTF-8" />
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json</value>
-				<value>text/xml</value>
-				<value>application/x-www-form-urlencoded</value>
-			</list>
-		</property>
-	</bean>
+<!-- 	<bean id="stringHttpMessageConverter" -->
+<!-- 		class="org.springframework.http.converter.StringHttpMessageConverter"> -->
+<!-- 		<constructor-arg index="0" name="defaultCharset" -->
+<!-- 			value="UTF-8" /> -->
+<!-- 		<property name="supportedMediaTypes"> -->
+<!-- 			<list> -->
+<!-- 				<value>application/json</value> -->
+<!-- 				<value>text/xml</value> -->
+<!-- 				<value>application/x-www-form-urlencoded</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 </beans>
