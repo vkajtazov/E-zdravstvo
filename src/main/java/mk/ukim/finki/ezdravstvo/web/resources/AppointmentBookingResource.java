@@ -63,7 +63,7 @@ public class AppointmentBookingResource {
 			e.printStackTrace();
 		}
 
-		java.sql.Date d = new java.sql.Date(date.getTime());
+		java.sql.Date d = new java.sql.Date(date.getTime()+1);
 
 		if (doctorId != null) {
 			Doctor d1 = doctorService.findOne(doctorId);
