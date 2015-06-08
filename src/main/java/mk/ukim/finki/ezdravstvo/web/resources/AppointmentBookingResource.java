@@ -47,8 +47,28 @@ public class AppointmentBookingResource {
 	@RequestMapping(value = "/find", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<TimeSlots> searchSlots(@RequestParam("byDate") Date byDate,
+			@RequestParam(value = "doctor_id", required = false) Long doctorId,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		String tmp = formatter.format(byDate);
+		System.out.println(tmp);
+		Date date = null;
+		try {
+			date = formatter.parse(tmp);
+			System.out.println(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		java.sql.Date d = new java.sql.Date(date.getTime());
+
+		if (doctorId != null) {
+			Doctor d1 = doctorService.findOne(doctorId);
+			return service.findFreeSlots(d, d1);
+		}
 
 		Authentication authentication = SecurityContextHolder.getContext()
 				.getAuthentication();
@@ -62,22 +82,6 @@ public class AppointmentBookingResource {
 			UserDetails userDetails = (UserDetails) principal;
 			Patient patient = patientService.findByUsername(userDetails
 					.getUsername());
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			System.out.println(byDate);
-
-			String tmp = formatter.format(byDate);
-			System.out.println(tmp);
-			Date date = null;
-			try {
-				date = formatter.parse(tmp);
-				System.out.println(date);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			java.sql.Date d = new java.sql.Date(date.getTime());
 
 			return service.findFreeSlots(d, patient.getPrimaryDoctor());
 
@@ -173,14 +177,15 @@ public class AppointmentBookingResource {
 			UserDetails userDetails = (UserDetails) principal;
 			Doctor referrer = doctorService.findByUsername(userDetails
 					.getUsername());
-			Doctor doctor =  doctorService.findOne(doctorId);
+			Doctor doctor = doctorService.findOne(doctorId);
 			Patient patient = patientService.findOne(patientId);
-			return service.bookAppointmentFromDoctor(date, timeSlot, doctor, patient, referrer);
+			return service.bookAppointmentFromDoctor(date, timeSlot, doctor,
+					patient, referrer);
 		}
 		return false;
 
 	}
-	
+
 	@RequestMapping(value = "/byReferrer", method = RequestMethod.GET, produces = "application/json")
 	public List<AppointmentBooking> getByReferrer(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
