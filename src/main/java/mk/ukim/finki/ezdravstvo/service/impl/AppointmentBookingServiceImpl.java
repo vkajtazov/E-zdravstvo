@@ -96,7 +96,7 @@ public class AppointmentBookingServiceImpl
 			return null;
 		}
 
-		java.sql.Date d = new java.sql.Date(date.getTime());
+		java.sql.Date d = new java.sql.Date(date.getTime()+1);
 		return d;
 	}
 
