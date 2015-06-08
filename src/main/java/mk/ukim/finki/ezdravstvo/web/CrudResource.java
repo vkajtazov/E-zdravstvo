@@ -1,5 +1,6 @@
 package mk.ukim.finki.ezdravstvo.web;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,17 +35,25 @@ public abstract class CrudResource<T extends BaseEntity, S extends BaseEntityCru
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
-	@Deprecated
 	public void edit(@PathVariable Long id, @RequestBody @Valid T jsonEntity,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+			throws IllegalArgumentException, IllegalAccessException {
 		T persistentEntity = getService().findOne(id);
 		copyFields(jsonEntity, persistentEntity);
 		getService().save(persistentEntity);
 	}
 
-	private void copyFields(T from, T to) {
-		// TODO Auto-generated method stub
+	private void copyFields(T from, T to) throws IllegalArgumentException,
+			IllegalAccessException {
+		Field[] fields = from.getClass().getDeclaredFields();
 
+		for (Field field : fields) {
+			field.setAccessible(true);
+
+			if (field.get(from) != null) {
+				field.set(to, field.get(from));
+			}
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
