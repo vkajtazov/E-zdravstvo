@@ -26,6 +26,7 @@ public interface AppointmentBookingRepository extends
 
 	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.patient=?1 AND ab.status.id=1")
 	List<AppointmentBooking> findByPatient(Patient patient);
-	
+
+	@Query(value = "SELECT ab FROM AppointmentBooking ab WHERE ab.referrer=?1 AND ab.status.id=1")
 	List<AppointmentBooking> findByReferrer(Doctor referrer);
 }
