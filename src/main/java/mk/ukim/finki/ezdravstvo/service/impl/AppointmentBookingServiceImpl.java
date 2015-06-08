@@ -2,11 +2,9 @@ package mk.ukim.finki.ezdravstvo.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import mk.ukim.finki.ezdravstvo.model.AppointmentBooking;
 import mk.ukim.finki.ezdravstvo.model.BookingStatus;
@@ -19,6 +17,9 @@ import mk.ukim.finki.ezdravstvo.repository.BookingStatusRepository;
 import mk.ukim.finki.ezdravstvo.repository.TimeSlotsRepository;
 import mk.ukim.finki.ezdravstvo.service.AppointmentBookingService;
 import mk.ukim.finki.ezdravstvo.service.mail.EmailNotificationService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AppointmentBookingServiceImpl
@@ -96,7 +97,11 @@ public class AppointmentBookingServiceImpl
 			return null;
 		}
 
-		java.sql.Date d = new java.sql.Date(date.getTime()+1);
+		java.sql.Date d = new java.sql.Date(date.getTime());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+		cal.add(Calendar.DAY_OF_YEAR, 1);
+		d = new java.sql.Date(cal.getTimeInMillis());
 		return d;
 	}
 

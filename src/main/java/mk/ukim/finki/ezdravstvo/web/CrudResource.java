@@ -35,12 +35,13 @@ public abstract class CrudResource<T extends BaseEntity, S extends BaseEntityCru
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
-	public void edit(@PathVariable Long id, @RequestBody @Valid T jsonEntity,
+	public T edit(@PathVariable Long id, @RequestBody @Valid T jsonEntity,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IllegalArgumentException, IllegalAccessException {
 		T persistentEntity = getService().findOne(id);
 		copyFields(jsonEntity, persistentEntity);
 		getService().save(persistentEntity);
+		return persistentEntity;
 	}
 
 	private void copyFields(T from, T to) throws IllegalArgumentException,
