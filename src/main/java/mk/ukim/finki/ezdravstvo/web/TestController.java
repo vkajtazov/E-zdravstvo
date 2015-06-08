@@ -16,9 +16,11 @@ import mk.ukim.finki.ezdravstvo.service.PatientService;
 import mk.ukim.finki.ezdravstvo.service.mail.EmailNotificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -40,14 +42,15 @@ public class TestController {
 	@Autowired
 	private PatientService patientService;
 
-	@RequestMapping(value = "/addDoctor", method = RequestMethod.GET, produces = "application/json")
-	public Doctor createDoctor() {
+	@RequestMapping(value = "/addDoctor/{doc}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Doctor createDoctor(@PathVariable String doc) {
 		Doctor tmp = new Doctor();
 		tmp.setFistName("Бла бла доктор");
-		tmp.setUsername("blabla");
+		tmp.setUsername(doc);
 		tmp = (Doctor) tmp;
 		tmp.setPassword("qwe");
-		return doctorService.saveAndFlush(tmp);
+		return doctorService.save(tmp);
 	}
 
 	@RequestMapping(value = "/testValueGet", method = RequestMethod.GET, produces = "application/json")
