@@ -3,6 +3,7 @@ package mk.ukim.finki.ezdravstvo.web.resources;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +64,11 @@ public class AppointmentBookingResource {
 			e.printStackTrace();
 		}
 
-		java.sql.Date d = new java.sql.Date(date.getTime() + 1);
+		java.sql.Date d = new java.sql.Date(date.getTime());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+		cal.add(Calendar.DAY_OF_YEAR, 1);
+		d = new java.sql.Date(cal.getTimeInMillis());
 
 		if (doctorId != null) {
 			Doctor d1 = doctorService.findOne(doctorId);
