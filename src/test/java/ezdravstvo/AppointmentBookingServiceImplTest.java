@@ -23,19 +23,19 @@ import static org.mockito.Mockito.*;
 
 
 public class AppointmentBookingServiceImplTest {
+	
 	@Autowired
-	public AppointmentBookingServiceImpl service;
-	
-	@Mock
 	public AppointmentBookingRepository repo;
-	
-	
+	@Mock
+	public AppointmentBookingServiceImpl service;
+	public Doctor doctor;
+	public Doctor doctor1;
 	
 	
 	@Before
 	public void setUp()
 	{
-		Doctor doctor = new Doctor();
+		doctor = new Doctor();
 		doctor.setFistName("Ivana");
 		doctor.setLastName("Kajtazova");
 		doctor.setCity("Gevgelija");
@@ -46,7 +46,7 @@ public class AppointmentBookingServiceImplTest {
 		AppointmentBooking booking = new AppointmentBooking();
 		booking.setDoctor(doctor);
 		booking.setDate(Date.valueOf("2018-5-15"));
-		Doctor doctor1 = new Doctor();
+		doctor1 = new Doctor();
 		doctor.setFistName("Petko");
 		doctor.setLastName("Petkov");
 		doctor.setCity("Skopje");
