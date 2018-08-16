@@ -17,7 +17,7 @@ public abstract class BaseEntityCrudServiceImpl<T extends BaseEntity, R extends 
 	protected abstract R getRepository();
 
 	@Override
-	public T save(T entity) {
+	public T save(T entity) {	
 		return getRepository().save(entity);
 	}
 

@@ -170,7 +170,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${spring-framework.version}</version>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -180,7 +180,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${spring-framework.version}</version>
+			
 		</dependency>
 		<!-- used for EhCacheCacheManager -->
 		<dependency>
@@ -191,7 +191,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>${spring-framework.version}</version>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -450,7 +450,7 @@
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
-			<version>[0.4, 0.5)</version>
+			
 		</dependency>
 
 		<dependency>
@@ -462,6 +462,16 @@
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>2.10.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-dependency-plugin</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.15.0</version>
 		</dependency>
 	</dependencies>
 
@@ -507,6 +517,18 @@
 				<artifactId>thumbnailator</artifactId>
 				<version>[0.4, 0.5)</version>
 			</dependency>
+			<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+    <version>1.5.3.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+    <version>1.4.194</version>
+</dependency>
 		</dependencies>
 	</dependencyManagement>
 
