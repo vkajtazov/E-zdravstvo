@@ -23,7 +23,7 @@ public abstract class BaseEntityCrudServiceImpl<T extends BaseEntity, R extends 
 
 	@Override
 	public List<T> save(Iterable<T> entities) {
-		return getRepository().save(entities);
+		return null;
 	}
 
 	@Override
