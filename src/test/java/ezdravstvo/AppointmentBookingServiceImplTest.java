@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 
 
 public class AppointmentBookingServiceImplTest {
-	
+	//Does exist appointment with id(1)
 	@Test
 	public void  doesExist() {
 		AppointmentBookingServiceImpl service = mock(AppointmentBookingServiceImpl.class);
@@ -38,6 +38,7 @@ public class AppointmentBookingServiceImplTest {
 		assertEquals(service.exists((long)1), true);
 		
 	}
+	//Cancel appointment with id(3)
 	@Test
 	public void  cancelAppointment() {
 		AppointmentBookingServiceImpl service = mock(AppointmentBookingServiceImpl.class);
@@ -46,7 +47,7 @@ public class AppointmentBookingServiceImplTest {
 		
 	}
 
-	
+	//Check if exist appointment from some doctor 
 	@Test
 	public void  bookAppointmentDoctor() {
 		Doctor doctor = new Doctor();
@@ -69,6 +70,7 @@ public class AppointmentBookingServiceImplTest {
 		assertEquals(service.bookAppointmentFromDoctor(Date.valueOf("2018-03-21"), timeslots, doctor, pacient, doctor), true);
 		
 	}
+	//Find all appointments
 	@Test
 	public void  findallAppointments () {
 		Doctor doctor = new Doctor();
@@ -116,6 +118,7 @@ public class AppointmentBookingServiceImplTest {
 		assertEquals(service.findAll(),result);
 		
 	}
+	//Find appointment by patient
 	@Test
 	public void  findPatient() {
 		Patient patient = new Patient();
@@ -134,6 +137,7 @@ public class AppointmentBookingServiceImplTest {
 	
 		
 	}
+	//Find list of timeslots by date and doctor
 	@Test
 	public void findfreeSlots() {
 		Doctor doctor = new Doctor();
@@ -166,6 +170,7 @@ public class AppointmentBookingServiceImplTest {
 		assertEquals(service.findFreeSlots(Date.valueOf("2018-04-17"), doctor),result);
 		
 	}
+	//Find freeslots with empty list inserted
 	@Test
 	public void emptyListSlots() {
 		Doctor doctor = new Doctor();
@@ -180,6 +185,7 @@ public class AppointmentBookingServiceImplTest {
 		assertEquals(service.findFreeSlots(Date.valueOf("2018-05-10"), doctor),result);
 		
 	}
+	//check if appointment is created by doctor 
 	@Test
 	public void bookAppointment() {
 		Doctor doctor = new Doctor();
@@ -207,6 +213,7 @@ public class AppointmentBookingServiceImplTest {
 		
 		
 	}
+	//Find list by referrer (Doctor)
 	@Test
 	public void findListByReferrer() {
 		Doctor referrer = new Doctor();
@@ -245,6 +252,7 @@ public class AppointmentBookingServiceImplTest {
 	
 		
 	}
+	//Find list of appointments by referrer (doctor) with empty list
 	@Test
 	public void findByReferrerWithNullInput() {
 		Doctor referrer = new Doctor();
@@ -262,6 +270,7 @@ public class AppointmentBookingServiceImplTest {
 		
 		
 	}
+	//Find free slots with inserted empty list
 	@Test
 	public void findfreeSlotsEmptyList() {
 		Doctor doctor = new Doctor();

@@ -16,6 +16,7 @@ import mk.ukim.finki.ezdravstvo.service.impl.PatientServiceImpl;
 
 public class PatientServiceImplTest {
 
+	//Find patient by username
 	@Test
 	public void findByUsername() {
 		Patient patient = new Patient();
@@ -25,6 +26,7 @@ public class PatientServiceImplTest {
 		Mockito.when(service.findByUsername("petkop")).thenReturn(patient);
 		assertEquals(service.findByUsername("petkop"),patient);
 	}
+	//Find patient by username with userfield empty
 	@Test
 	public void findByUsernameEmpty() {
 		Patient patient = new Patient();
@@ -35,6 +37,7 @@ public class PatientServiceImplTest {
 		Mockito.when(service.findByUsername("")).thenReturn(patient);
 		assertEquals(service.findByUsername(""),patient);
 	}
+	//find from the list of doctors specified patient 
 	@Test
 	public void findByDoctor() {
 		Doctor doctor = new Doctor();
@@ -61,6 +64,7 @@ public class PatientServiceImplTest {
 		Mockito.when(service.findByDoctor(doctor)).thenReturn(patients);
 		assertEquals(service.findByDoctor(doctor),patients);
 	}
+	//find patient by list of empty doctors
 	@Test
 	public void findByDoctorEmptyList() {
 		Doctor doctor = new Doctor();

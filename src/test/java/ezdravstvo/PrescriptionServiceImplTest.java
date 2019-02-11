@@ -17,7 +17,7 @@ import mk.ukim.finki.ezdravstvo.service.impl.PatientServiceImpl;
 import mk.ukim.finki.ezdravstvo.service.impl.PrescriptionServiceImpl;
 
 public class PrescriptionServiceImplTest {
-
+	//find all prescriptions by diagnose
 	@Test
 	public void findByDiagnose() {
 		Diagnose diagnose = new Diagnose();
@@ -45,6 +45,7 @@ public class PrescriptionServiceImplTest {
 		Mockito.when(service.findByDiagnose(diagnose)).thenReturn(list);
 		assertEquals(service.findByDiagnose(diagnose),list);
 	}
+	//find all prescriptions with empty list
 	@Test
 	public void findByDiagnoseEmptyList() {
 		Diagnose diagnose = new Diagnose();

@@ -19,7 +19,7 @@ import mk.ukim.finki.ezdravstvo.service.impl.AppointmentBookingServiceImpl;
 import mk.ukim.finki.ezdravstvo.service.impl.DiagnoseServiceImpl;
 
 public class DiagnoseServiceImplTest {
-
+	//Find all diagnoses by patient
 	@Test
 	public void findPacientDiagnoses() {
 		Patient patient = new Patient();
@@ -45,6 +45,7 @@ public class DiagnoseServiceImplTest {
 		assertEquals(service.findByPatient(patient), result);
 		
 	}
+	//Find diagnoses for patient where list is empty
 	@Test
 	public void findByPatientEmpty() {
 		Patient patient = new  Patient();
